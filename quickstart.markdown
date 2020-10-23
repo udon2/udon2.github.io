@@ -6,9 +6,11 @@ nav_order: 2
 ---
 
 ## Installation
-### UDon2 from PyPi
+### UDon2 from PyPi [currently work in progress]
 UDon2 is pre-compiled for Python 3.6+ and available for all Linux distributions and Windows (32 and 64 bit) using pip (see the command below). Mac OS is currently not supported. 
-`pip install udon2`
+```
+pip install udon2
+```
 
 ### UDon2 from sources
 Pre-compiled version of UDon2 is pretty quick, but it could be made even faster by compiling from sources for your own machine specifically. This requires first to install all prerequisites.

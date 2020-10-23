@@ -58,8 +58,8 @@ node.remove_child(n)
 ## Visualizing
 UDon2 is capable of visualizing the dependency tree and storing it as an SVG file (see example code snippet and a produced figure below).
 ```
-from udon2.visual import render_as_svg
-render_as_svg(node, "tree.svg") # node is an instance of udon2.Node
+from udon2.visual import render_dep_tree
+render_dep_tree(node, "tree.svg") # node is an instance of udon2.Node
 ```
 ![A visualized dependency tree for the sentence "You should study these topics or you will fail the exam"](/assets/images/en_dep_example.png)
 
