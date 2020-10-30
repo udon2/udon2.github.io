@@ -16,7 +16,7 @@ In exchange UDon2 offers:
 - an efficient Python package (see [benchmarks](/benchmarks)) requiring [minimal efforts to setup](/quickstart);
 - advanced operations on dependency trees, such as various transformations or computing convolution tree kernels;
 - a visualization module capable of producing SVG and PDF files;
-- a possibility to be used a C++ library;
+- a possibility to be used as a C++ library;
 - a user-friendly and well-documented API.
 
 
