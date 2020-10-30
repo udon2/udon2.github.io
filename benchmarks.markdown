@@ -5,3 +5,21 @@ permalink: /benchmarks/
 nav_order: 5
 ---
 
+# Comparison to other available Python packages
+We have benchmarked our code on [cs-ud-train-l.conllu](https://github.com/UniversalDependencies/UD_Czech-PDT/raw/r1.2/cs-ud-train-l.conllu) from UDv1.2 (68 MiB, 41k sentences, 800k words) and compared it with the other available libraries providing a Python API. All benchmarks were run 30 times on Ubuntu 20.04 and Windows 10 installed on the machine equipped with Intel(R) Core(TM) i7-8750H CPU @ 2.20GHz. 
+
+| Package     | OS          | Memory, MiB | Load, s             | Save, s            | Read, s            | Write, s            | Text, s            | Relchain, s        |
+| ----------- | ----------- | ----------- | ------------------- | ------------------ | ------------------ | ------------------- | ------------------ | ------------------ |
+| pyconll     | Ubuntu      | 1683.1      | 12.88 &plusmn; 1.07 | 6.32 &plusmn; 0.25 | 0.34 &plusmn; 0.02 | 0.23 &plusmn; 0.01  | NA                 | 0.47 &plusmn; 0.02 |
+|             | Windows     | 876.4       | 10.97 &plusmn; 0.63 | 6.23 &plusmn; 0.11 | 0.38 &plusmn; 0.03 | 0.23 &plusmn; 0.02  | NA                 | 0.54 &plusmn; 0.04 |
+| ----------- | ----------- | ----------- | ------------------- | ------------------ | ------------------ | ------------------- | ------------------ | ------------------ |
+| conllu      | Ubuntu      | 1208.7      | 16.83 &plusmn; 0.3  | 4.28 &plusmn; 0.06 | 0.19 &plusmn; 0.0  | 0.1 &plusmn; 0.0    | NA                 | 0.25 &plusmn; 0.02 |
+|             | Windows     | 707.2       | 19.11 &plusmn; 3.32 | 5.23 &plusmn; 1.1  | 0.22 &plusmn; 0.04 | 0.09 &plusmn; 0.01  | NA                 | 0.3 &plusmn; 0.06  |
+| ----------- | ----------- | ----------- | ------------------- | ------------------ | ------------------ | ------------------- | ------------------ | ------------------ |
+| Udapi-Python| Ubuntu      | 756.0       | 19.88 &plusmn; 1.05 | 6.86 &plusmn; 0.12 | 0.19 &plusmn; 0.01 | 0.14 &plusmn; 0.01  | 0.94 &plusmn; 0.03 | 0.16 &plusmn; 0.01 |
+|             | Windows     | 421.6       | 19.09 &plusmn; 1.08 | 8.51 &plusmn; 1.36 | 0.2 &plusmn; 0.02  | 0.11 &plusmn; 0.01  | 1.01 &plusmn; 0.1  | 0.15 &plusmn; 0.01 |
+| ----------- | ----------- | ----------- | ------------------- | ------------------ | ------------------ | ------------------- | ------------------ | ------------------ |
+| UDon2       | Ubuntu      | 772.0       | 3.27 &plusmn; 0.07  | 3.34 &plusmn; 0.03 | 0.75 &plusmn; 0.0  | 0.42 &plusmn; 0.0   | 0.24 &plusmn; 0.0  | 0.14 &plusmn; 0.0  |
+|             | Windows     | 439.7       | 4.44 &plusmn; 0.32  | 5.53 &plusmn; 0.64 | 0.83 &plusmn; 0.07 | 0.42 &plusmn; 0.04  | 0.41 &plusmn; 0.34 | 0.15 &plusmn; 0.01 |
+
+Benchmark code is available [here](https://github.com/udon2/udon2/tree/master/benchmarks).
