@@ -22,4 +22,13 @@ We have benchmarked our code on [cs-ud-train-l.conllu](https://github.com/Univer
 | UDon2       | Ubuntu      | 772.0       | 3.27 &plusmn; 0.07  | 3.34 &plusmn; 0.03 | 0.75 &plusmn; 0.0  | 0.42 &plusmn; 0.0   | 0.24 &plusmn; 0.0  | 0.14 &plusmn; 0.0  |
 |             | Windows     | 439.7       | 4.44 &plusmn; 0.32  | 5.53 &plusmn; 0.64 | 0.83 &plusmn; 0.07 | 0.42 &plusmn; 0.04  | 0.41 &plusmn; 0.34 | 0.15 &plusmn; 0.01 |
 
-Benchmark code is available [here](https://github.com/udon2/udon2/tree/master/benchmarks).
+
+More detailed descriptions of each benchmark:
+- **Load** refers to loading from CoNLL-U file;
+- **Save** - to storing to the CoNLL-U file;
+- **Read** - getting a form and a lemma for every node of every tree;
+- **Write** - changing a deprel for every node of every tree;
+- **Text** - computing a textual representation of a subtree induced by every root node of every tree;
+- **Relchain** - finding nodes at the end of a relchain for every tree.
+
+For more details, please refer to the benchmark code available [here](https://github.com/udon2/udon2/tree/master/benchmarks).
