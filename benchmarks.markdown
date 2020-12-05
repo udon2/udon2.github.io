@@ -6,7 +6,7 @@ nav_order: 5
 ---
 
 # Comparison to other available Python packages
-We have benchmarked our code on [cs-ud-train-l.conllu](https://github.com/UniversalDependencies/UD_Czech-PDT/raw/r1.2/cs-ud-train-l.conllu) from UDv1.2 (68 MiB, 41k sentences, 800k words) and compared it with the other available libraries providing a Python API. All benchmarks were run 30 times on Ubuntu 20.04 and Windows 10 installed on the machine equipped with Intel(R) Core(TM) i7-8750H CPU @ 2.20GHz. 
+We have benchmarked our code on [cs-ud-train-l.conllu](https://github.com/UniversalDependencies/UD_Czech-PDT/raw/r1.2/cs-ud-train-l.conllu) from UDv1.2 (68 MiB, 41k sentences, 800k words) and compared it with the other available libraries providing a Python API. All benchmarks were run 30 times on Ubuntu 20.04 (64-bit Python) and Windows 10 (32-bit Python) installed on the machine equipped with Intel(R) Core(TM) i7-8750H CPU @ 2.20GHz. 
 
 | Package     | OS          | Memory, MiB | Load, s             | Save, s            | Read, s            | Write, s            | Text, s            | Relchain, s        |
 | ----------- | ----------- | ----------- | ------------------- | ------------------ | ------------------ | ------------------- | ------------------ | ------------------ |
@@ -32,3 +32,11 @@ More detailed descriptions of each benchmark:
 - **Relchain** - finding nodes at the end of a relchain for every tree.
 
 For more details, please refer to the benchmark code available [here](https://github.com/udon2/udon2/tree/master/benchmarks).
+
+**NOTE** that UDon2 compiled for a specific Linux machine performs significantly better than the one available via PyPi, since the wheel for PyPi was created with `manylinux2010` tag (to ensure compatibility with many Linux distributions). So if you need performance boost on a Linux, machine-specific compilation will most probably solve your problems. To give an idea of the kind of performance boost, we present results of the same benchmarks on the same machine, but with a machine-specific version of UDon2.
+
+| Package     | OS          | Memory, MiB | Load, s             | Save, s            | Read, s            | Write, s            | Text, s            | Relchain, s        |
+| ----------- | ----------- | ----------- | ------------------- | ------------------ | ------------------ | ------------------- | ------------------ | ------------------ |
+| UDon2*       | Ubuntu      | 549.9       | 1.79 &plusmn; 0.11  | 2.42 &plusmn; 0.12 | 0.75 &plusmn; 0.03  | 0.36 &plusmn; 0.02   | 0.2 &plusmn; 0.01  | 0.1 &plusmn; 0.0  |
+
+**Observe**, that machine-specific compilation for Windows will not give any performance benefits, since wheels were built with regular `win32` and `win_amd64` tags.
