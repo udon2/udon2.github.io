@@ -66,9 +66,6 @@ lct = to_lct(n)
 
 Since transformed trees have unlabeled edges, the familiar `render_dep_tree` function will not provide a good visualization. Hence, we introduce a new visualization function, namely `render_tree`.
 
-Coming in 0.1a2
-{: .label .label-yellow }
-
 ```py
 from udon2.visual import render_tree
 render_tree(pct, "pct.svg")
