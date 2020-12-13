@@ -33,7 +33,16 @@ More detailed descriptions of each benchmark:
 
 For more details, please refer to the benchmark code available [here](https://github.com/udon2/udon2/tree/master/benchmarks).
 
-**NOTE** that UDon2 compiled for a specific Linux machine performs significantly better than the one available via PyPi, since the wheel for PyPi was created with `manylinux2010` tag (to ensure compatibility with many Linux distributions). So if you need performance boost on a Linux, machine-specific compilation will most probably solve your problems. To give an idea of the kind of performance boost, we present results of the same benchmarks on the same machine, but with a machine-specific version of UDon2.
+Important
+{: .label .label-red .mb-0 .ml-0 .mt-5}
+
+UDon2 performs worse on **Read** and **Write** benchmarks due to them using Python's for-loops with C++ objects. This is known to result in slow performance (e.g. also in Numpy), which is why it is recommended to use the pre-defined methods for querying. Optimizing these benchmarks is currently work in progress.
+
+
+Note
+{: .label .label-blue .mb-0 .ml-0 .mt-5}
+
+UDon2 compiled for a specific Linux machine performs significantly better than the one available via PyPi, since the wheel for PyPi was created with `manylinux2010` tag (to ensure compatibility with many Linux distributions). So if you need performance boost on a Linux, machine-specific compilation will most probably solve your problems. To give an idea of the kind of performance boost, we present results of the same benchmarks on the same machine, but with a machine-specific version of UDon2.
 
 | Package     | OS          | Memory, MiB | Load, s             | Save, s            | Read, s            | Write, s            | Text, s            | Relchain, s        |
 | ----------- | ----------- | ----------- | ------------------- | ------------------ | ------------------ | ------------------- | ------------------ | ------------------ |
