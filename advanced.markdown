@@ -52,6 +52,7 @@ r.group_by("upos")
 ```
 
 ## Transformations
+### PCT, GRCT and LCT
 UDon2 allows transforming dependency trees to include edge labels as separate nodes into trees centered around PoS-tags (PCT), grammatical relations (GRCT) or lexicals (LCT), as introduced by [Croce et al. (2011)](https://www.aclweb.org/anthology/D11-1096.pdf). To exemplify, consider the following tree.
 ![A visualized dependency tree for the sentence "You should study these topics or you will fail the exam"](/assets/images/en_dep_example.png)
 
@@ -73,21 +74,66 @@ render_tree(grct, "grct.svg")
 render_tree(lct, "lct.svg")
 ```
 
+
+Note
+{: .label .label-blue .mb-0 .ml-0 .mt-2}
+When exporting SVG produced by `render_tree` to PNG or PDF, include the whole page and not only the drawing area by using the following command.
+```
+inkscape grct.svg --export-area-page --batch-process --export-type=png --export-filename=grct.png
+```
+
 {:refdef1: style="text-align: center; margin-bottom: 40px;"}
 {:refdef2: style="text-align: center;"}
 ![A visualized PCT for the sentence "You should study these topics or you will fail the exam"](/assets/images/pct.png)
+<br>
 *pct.svg*
 {: refdef1}
 
 {:refdef2: style="text-align: center; margin-bottom: 40px;"}
 ![A visualized GRCT for the sentence "You should study these topics or you will fail the exam"](/assets/images/grct.png)
+<br>
 *grct.svg*
 {: refdef1}
 
 
 ![A visualized LCT for the sentence "You should study these topics or you will fail the exam"](/assets/images/lct.png)
+<br>
 *lct.svg*
 {: refdef2}
+
+New in 0.1b3
+{: .label .label-green .mb-0 .ml-0 .mt-2}
+A possibility to include FEATS as a separate node and/or exclude FORM during transformations to PCT and GRCT is now added. LCT supports only including/excluding FEATS, since FORM is the backbone of this transformation. The examples below are shown only for GRCT.
+
+```py
+from udon2.transform import to_pct, to_grct, to_lct
+
+grct_with_feats = to_grct(n, includeFeats=True)
+grct_wout_form = to_grct(n, includeForm=False)
+
+render_tree(grct_with_feats, "grct_with_feats.svg")
+render_tree(grct_wout_form, "grct_wout_form.svg")
+```
+
+![A visualized GRCT with FEATS as a separate node](/assets/images/grct_with_feats.png)
+<br>
+*grct_with_feats.svg*
+{: refdef1}
+
+![A visualized GRCT without FORM](/assets/images/grct_wout_form.png)
+<br>
+*grct_wout_form.svg*
+{: refdef2}
+
+### Random distortion
+New in 0.1b3
+{: .label .label-green .mb-0 .ml-0 .mt-2}
+Sometimes one needs to create dummy data from existing trees for trianing ML algorithms. UDon2 allows to do that using `distort` transformation. This transformation is performed over a number of comma-separated attributes (`upos`, `deprel`, `lemma`, and `form`), which are flipped with a specified probability `p`. `upos` and `deprel` will be randomly flipped to another valid value, whereas `lemma` and `form` will be replaced by a randomly generated string.
+```py
+from udon2.transform import distort
+p = 0.8 # probability to be distorted
+n_distorted = distort(n, p, "upos,deprel,form")
+```
 
 
 ## Convolution kernels
@@ -98,6 +144,17 @@ In UDon2, a partial tree kernel can be calculated in any of the aforementioned f
 from udon2.kernels import ConvPartialTreeKernel
 # ptk_lambda and ptk_mu are decay factors as defined by Moschitti (2006)
 kernel = ConvPartialTreeKernel(tree_format, ptk_lambda, ptk_mu)
+# prints a number of common tree fragments between trees rooted at root1 and root2
+print(kernel(root1, root2)) # root1 and root2 are udon2.Node instances
+```
+
+New in 0.1b3
+{: .label .label-green .mb-0 .ml-0 .mt-2}
+Convolution kernels now support new transformations including/excluding FEATS and FORM. These can be passed as keyword arguments (`includeFeats` is `False` by default and `includeForm` is `True`) the constructor. Additionally `mu` and `lambda` also are available as keyword arguments, both having the value of 1 by default. Note that `includeForm` will have no influence on `LCT` transformation.
+```py
+from udon2.kernels import ConvPartialTreeKernel
+# ptk_lambda and ptk_mu are decay factors as defined by Moschitti (2006)
+kernel = ConvPartialTreeKernel("GRCT", includeFeats=True, includeForm=False)
 # prints a number of common tree fragments between trees rooted at root1 and root2
 print(kernel(root1, root2)) # root1 and root2 are udon2.Node instances
 ```

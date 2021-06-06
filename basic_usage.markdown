@@ -17,6 +17,8 @@ nav_order: 3
 {:toc}
 </details>
 
+## Reading/writing
+
 The central concept of UDon2 is a `udon2.Node` (later simply `Node`), which corresponds a node of the dependency tree. Dependency trees can be fed to UDon2 through files in the [CoNLL-U format](https://universaldependencies.org/format.html) by using the snippet below. Each `Node` corresponds to one line of the file in the CoNLL-U format.
 ```py
 import udon2
@@ -55,6 +57,25 @@ node.add_child(n)
 node.remove_child(n)
 ```
 
+New in 0.1b3
+{: .label .label-green .mb-0 .ml-0 .mt-2}
+A new `Importer` class is available for reading dependency trees into UDon2. The first way of reading is from CoNLL-U files (effectively just calling `ConllReader` inside).
+```py
+import udon2
+# assumes that you have a file named 'test.conllu' with a valid CoNLL-U format
+roots = udon2.Importer.from_conll_file('test.conllu')
+```
+
+The second way is by converting objects from [Stanza](https://github.com/stanfordnlp/stanza), which serves models pre-trained on UD treebanks.
+```py
+import stanza
+import udon2
+
+en = stanza.Pipeline(lang="en", processors='tokenize,lemma,pos,depparse')
+roots = udon2.Importer.from_stanza(en("This is my first sentence.").to_dict())
+```
+
+
 ## Visualizing
 UDon2 is capable of visualizing the dependency tree and storing it as an SVG file (see example code snippet and a produced figure below).
 ```py
@@ -67,6 +88,34 @@ Other formats are currently not supported. However, your SVG image can then be c
 ```
 inkscape tree.svg --export-area-drawing --batch-process --export-type=pdf --export-filename=output.pdf
 ```
+
+New in 0.1b3
+{: .label .label-green .mb-0 .ml-0 .mt-2}
+Now it is possible to customize plots by including optional arguments `include_upos` (`True` by default), `include_xpos` (`False` by default), `include_ids` (`False` by default) and `include_feats` (`True` by default) into the options dictionary of `render_dep_tree`. See examples of every argument below.
+```py
+from udon2.visual import render_dep_tree
+render_dep_tree(node, "with_xpos.svg", options={'include_xpos': True})
+```
+![A dependency tree with XPOS visualized](/assets/images/include_xpos.png)
+
+```py
+from udon2.visual import render_dep_tree
+render_dep_tree(node, "without_feats.svg", options={'include_feats': False})
+```
+![A dependency tree without FEATS visualized](/assets/images/not_include_feats.png)
+
+```py
+from udon2.visual import render_dep_tree
+render_dep_tree(node, "with_ids.svg", options={'include_ids': True})
+```
+![A dependency tree with IDs visualized](/assets/images/include_ids.png)
+
+
+```py
+from udon2.visual import render_dep_tree
+render_dep_tree(node, "with_all.svg", options={'include_ids': True, 'include_xpos': True})
+```
+![A dependency tree with everything visualized](/assets/images/include_all.png)
 
 ## Querying string features
 `Node` class provides two basic methods for querying: `select_by` and `get_by`. Both methods require two arguments `prop`, a string specifying a property name (one of "upos", "xpos", "lemma", "deprel", "form"), and `value`, a value of this property for a `Node` to be selected. The main difference is that `select_by` will return **ALL** `Node`s in the subtree induced by the current `Node` satisfying the condition, whereas `get_by` will return only immediate children.
@@ -113,3 +162,12 @@ Downstream application require frequent switches between a tree order and a line
 
 #### Syntactic sugar
 A frequent application for a linear order is to get a text of the subtree induced by the given node in the same order as in the original sentence. This can be computed using `node.get_subtree_text()`.
+
+
+## Checking projectivity
+New in 0.1b3
+{: .label .label-green .mb-0 .ml-0 .mt-0}
+An arc in a dependency tree is called projective if there is a path from the head to every word between the head and the dependent. If all arcs are projective, then the whole dependency tree is called projective. For instance, trees, prented in the section about visualization are projective and the tree presented below is non-projective.
+
+![An example of a non-projective dependency tree](/assets/images/non_projective_example.png)
+Now it is possible to check whether a subtree induced by a `Node n` is projective simply by calling `n.is_projective()`.
