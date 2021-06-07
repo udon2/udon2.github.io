@@ -66,7 +66,7 @@ import udon2
 roots = udon2.Importer.from_conll_file('test.conllu')
 ```
 
-The second way is by converting objects from [Stanza](https://github.com/stanfordnlp/stanza), which serves models pre-trained on UD treebanks.
+The second way is by converting objects from [Stanza](https://github.com/stanfordnlp/stanza), which a package serving models pre-trained on UD treebanks.
 ```py
 import stanza
 import udon2
@@ -167,7 +167,7 @@ A frequent application for a linear order is to get a text of the subtree induce
 ## Checking projectivity
 New in 0.1b3
 {: .label .label-green .mb-0 .ml-0 .mt-0}
-An arc in a dependency tree is called projective if there is a path from the head to every word between the head and the dependent. If all arcs are projective, then the whole dependency tree is called projective. For instance, trees, prented in the section about visualization are projective and the tree presented below is non-projective.
+An arc of a dependency tree is called projective if there is a path from the head to every word between the head and the dependent. If all arcs are projective, then the whole dependency tree is called projective. For instance, trees, prented in the section about visualization are projective and the tree presented below is non-projective.
 
 ![An example of a non-projective dependency tree](/assets/images/non_projective_example.png)
 Now it is possible to check whether a subtree induced by a `Node n` is projective simply by calling `n.is_projective()`.

@@ -128,7 +128,7 @@ render_tree(grct_wout_form, "grct_wout_form.svg")
 ### Random distortion
 New in 0.1b3
 {: .label .label-green .mb-0 .ml-0 .mt-2}
-Sometimes one needs to create dummy data from existing trees for trianing ML algorithms. UDon2 allows to do that using `distort` transformation. This transformation is performed over a number of comma-separated attributes (`upos`, `deprel`, `lemma`, and `form`), which are flipped with a specified probability `p`. `upos` and `deprel` will be randomly flipped to another valid value, whereas `lemma` and `form` will be replaced by a randomly generated string.
+Sometimes one needs to create dummy data from existing trees for training ML algorithms. UDon2 allows to do that using `distort` transformation. This transformation is performed over a number of comma-separated attributes (`upos`, `deprel`, `lemma`, and `form`), which are flipped with a specified probability `p`. `upos` and `deprel` will be randomly flipped to another valid value, whereas `lemma` and `form` will be replaced by a randomly generated string.
 ```py
 from udon2.transform import distort
 p = 0.8 # probability to be distorted
@@ -150,7 +150,7 @@ print(kernel(root1, root2)) # root1 and root2 are udon2.Node instances
 
 New in 0.1b3
 {: .label .label-green .mb-0 .ml-0 .mt-2}
-Convolution kernels now support new transformations including/excluding FEATS and FORM. These can be passed as keyword arguments (`includeFeats` is `False` by default and `includeForm` is `True`) the constructor. Additionally `mu` and `lambda` also are available as keyword arguments, both having the value of 1 by default. Note that `includeForm` will have no influence on `LCT` transformation.
+Convolution kernels now support new transformations including/excluding FEATS and FORM. These can be passed as keyword arguments (`includeFeats` is `False` by default and `includeForm` is `True`) to the constructor. Additionally `mu` and `lambda` also are available as keyword arguments, both having the value of 1 by default. Note that `includeForm` will have no influence on `LCT` transformation.
 ```py
 from udon2.kernels import ConvPartialTreeKernel
 # ptk_lambda and ptk_mu are decay factors as defined by Moschitti (2006)
