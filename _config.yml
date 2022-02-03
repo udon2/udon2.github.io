@@ -34,7 +34,7 @@ logo: "/assets/images/udon2_logo.png"
 # Build settings
 remote_theme: pmarsceill/just-the-docs
 # Uncomment to test locally
-theme: just-the-docs
+# theme: just-the-docs
 plugins:
   - jekyll-feed
 
