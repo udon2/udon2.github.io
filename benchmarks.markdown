@@ -2,7 +2,7 @@
 layout: page
 title: Benchmarks
 permalink: /benchmarks/
-nav_order: 5
+nav_order: 6
 ---
 
 # Comparison to other available Python packages

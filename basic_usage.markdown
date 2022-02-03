@@ -57,8 +57,8 @@ node.add_child(n)
 node.remove_child(n)
 ```
 
-New in 0.1b3
-{: .label .label-green .mb-0 .ml-0 .mt-2}
+From v0.1b3
+{: .label .label-blue .mb-0 .ml-0 .mt-2}
 A new `Importer` class is available for reading dependency trees into UDon2. The first way of reading is from CoNLL-U files (effectively just calling `ConllReader` inside).
 ```py
 import udon2
@@ -89,8 +89,8 @@ Other formats are currently not supported. However, your SVG image can then be c
 inkscape tree.svg --export-area-drawing --batch-process --export-type=pdf --export-filename=output.pdf
 ```
 
-New in 0.1b3
-{: .label .label-green .mb-0 .ml-0 .mt-2}
+From v0.1b3
+{: .label .label-blue .mb-0 .ml-0 .mt-2}
 Now it is possible to customize plots by including optional arguments `include_upos` (`True` by default), `include_xpos` (`False` by default), `include_ids` (`False` by default) and `include_feats` (`True` by default) into the options dictionary of `render_dep_tree`. See examples of every argument below.
 ```py
 from udon2.visual import render_dep_tree
@@ -132,6 +132,11 @@ The other difference between the two methods is that `select_by` accepts one mor
 # returns all nodes except the ones for the words "topics" and "exam"
 root.select_by("deprel", "obj", True)
 ```
+
+New in v0.1.0
+{: .label .label-green .mb-0 .ml-0 .mt-2}
+You can now also use `root.select_by("id", "7")` to grab a node with the ID of 7.
+
 #### Syntactic sugar
 If you want to follow the chain of deprels, then two methods are available to your rescue: `select_by_deprel_chain` and `get_by_deprel_chain` (with the same difference as `select_by` and `get_by`, except no `negate` argument is available this time). Both functions take the only value as an argument, which is the dot-separated chain of deprels, e.g. "advcl:relcl.nmod.case".
 ```py
@@ -165,8 +170,8 @@ A frequent application for a linear order is to get a text of the subtree induce
 
 
 ## Checking projectivity
-New in 0.1b3
-{: .label .label-green .mb-0 .ml-0 .mt-0}
+From v0.1b3
+{: .label .label-blue .mb-0 .ml-0 .mt-0}
 An arc of a dependency tree is called projective if there is a path from the head to every word between the head and the dependent. If all arcs are projective, then the whole dependency tree is called projective. For instance, trees, prented in the section about visualization are projective and the tree presented below is non-projective.
 
 ![An example of a non-projective dependency tree](/assets/images/non_projective_example.png)

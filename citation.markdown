@@ -2,7 +2,7 @@
 layout: page
 title: Citing
 permalink: /citing/
-nav_order: 6
+nav_order: 7
 ---
 
 # How to cite?
