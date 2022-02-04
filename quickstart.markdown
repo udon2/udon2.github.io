@@ -8,17 +8,16 @@ nav_order: 2
 ## Installation
 ### UDon2 from PyPi
 Pre-compiled version of UDon2 is available to be installed via pip (see the command below) for the following platforms:
-- all Linux distributions (32 and 64 bit) for Python 3.6 - 3.9
-- Windows (32 and 64 bit) for Python 3.7 - 3.8
+- all Linux distributions (32 and 64 bit) for Python 3.7 - 3.9 (support for Python 3.6 prior to UDon2 v0.1.0)
+- Windows (32 and 64 bit) for Python 3.7 - 3.9
+- macOS for Python 3.7 - 3.9
 
 ```
 pip install udon2
 ```
 
-MacOS is currently not supported.
-
 ### UDon2 from sources
-Pre-compiled version of UDon2 is pretty quick, but it could be made even faster by compiling from sources for your own machine specifically. You might also try to compile it on MacOS, but this was not tested, so do it at your own risk.
+The [source code](https://github.com/udon2/udon2) is available on GitHub. Pre-compiled version of UDon2 is pretty quick, but it could be made even faster by compiling from sources for your own machine specifically. You might also try to compile it on MacOS, but this was not tested, so do it at your own risk.
 #### Prerequisites
 - C++ compiler (gcc, g++ for Unix systems or msvc for Windows)
 - Boost.Python (tested for 1.71+)

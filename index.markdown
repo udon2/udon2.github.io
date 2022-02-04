@@ -5,7 +5,7 @@ nav_order: 1
 ---
 
 # UDon2 - A Package for Manipulating Universal Dependencies Trees
-UDon2 provides the possibility to manipulate Universal Dependencies trees. Written in C++ with Python bindings via Boost.Python, UDon2 combines efficiency and flexibility in one package.
+UDon2 provides the possibility to manipulate Universal Dependencies trees. Written in C++ with Python bindings via Boost.Python, UDon2 combines efficiency and flexibility in one package. UDon2 is open source and available on [GitHub](https://github.com/udon2/udon2) under MIT license.
 
 UDon2 is geared towards downstream NLP applications and thus makes the following sacrifices of generality in favor of efficiency:
 - not reading and storing comments in CoNLL-U files, as those are typically not provided by existing dependency parsers;
